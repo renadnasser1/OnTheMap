@@ -28,8 +28,8 @@ class LoginViewController: UIViewController {
     
     //    MARK: - Login
     @IBAction func loginClicked(_ sender: Any) {
-        let email = "renadnasser22@gmail.com"//emailTextFiled.text
-        let password = "r1234567R"//passwordTextFiled.text
+        let email = emailTextFiled.text!
+        let password = passwordTextFiled.text!
         
         if email == "" , password == ""{
             //Alert
