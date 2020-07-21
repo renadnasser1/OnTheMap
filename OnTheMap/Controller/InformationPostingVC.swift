@@ -16,17 +16,11 @@ class InformationPostingVC: UIViewController{
     @IBOutlet weak var mediaLinkTextFieled: UITextField!
     @IBOutlet weak var activityIndcator: UIActivityIndicatorView!
     
-    //MARK: - Life Cycle
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        
-    }
-    
     //MARK: - Methods
     
     //MARK: - Cancel
     @IBAction func camcelCliked(_ sender: Any) {
-        self.navigationController?.popViewController(animated: true)    }
+        dismiss(animated: true, completion: nil)  }
     
     //MARK: - Check conditions
     @IBAction func findLocationClicked(_ sender: UIButton) {
@@ -41,20 +35,20 @@ class InformationPostingVC: UIViewController{
         }
         
         // check geocode Coordinates
-        self.gecodeGnrator(locationString: location, mediaURL: mediaLink)
+        gecodeGnrator(locationString: location, mediaURL: mediaLink)
     }
     
     //MARK: - Gecode gnrator
     private func gecodeGnrator(locationString:String, mediaURL: String) {
         
-        self.activityIndcator.startAnimating()
+        activityIndcator.startAnimating()
         
         //convert location's locationString to coordinates
         CLGeocoder().geocodeAddressString(locationString) { (placeMarks, err) in
             
             //Handel Error
             if err != nil {
-                ErrorHandller.showAlert(title: "", message: "Please make sure the location is correct", viewController: self)
+                ErrorHandller.showAlert(title: "", message: err?.localizedDescription ?? "login Failed", viewController: self)
                 self.activityIndcator.stopAnimating()
                 return
             }
